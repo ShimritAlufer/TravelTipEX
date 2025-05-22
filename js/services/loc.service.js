@@ -104,10 +104,11 @@ function getLocCountByRateMap() {
         })
 }
 
+
 function getLocCountByUpdates() {
     return storageService.query(DB_KEY)
         .then(locs => {
-            const locCountByUpdates = locs.reduce((acc, loc) => {
+            const locCountByUpdates = locs.reduce((map, loc) => {
                 if(loc.updatedAt === loc.createdAt)
                     map.never++
                 else if(Date.now() - loc.updatedAt < 1000 * 60 * 60 * 24)
